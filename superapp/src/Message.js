@@ -1,5 +1,7 @@
-const Message = (props) => {
-    return <div className="message"> {props.text} </div>
+const Message = ({text}) => {
+    return <div className="message"> 
+            <p>{text.author}: {text.text}</p>
+        </div>
 }
 
 export default Message;
