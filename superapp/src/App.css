@@ -2,4 +2,33 @@
   text-align: center;
   padding-top: 50px;
   min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.chats-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 150px;
+  width: 250px;
+  border: 1px solid #d6d1d1;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.chat-input {
+  position: absolute;
+  left: 0;
+  bottom: -50px;
+  width: 250px;
+  display: flex;
+  margin-top: 30px;
+}
+
+.chat-msg {
+  width: 100%;
+  min-height: 90%;
+  max-height: 300px;
+  overflow: auto;
 }
