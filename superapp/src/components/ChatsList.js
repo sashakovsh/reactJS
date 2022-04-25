@@ -4,7 +4,6 @@ import { Grid, List, ListItemButton, ListItemText, Typography, IconButton, Link
 import {Link as RouterLink} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-
 const ChatsList = ({chats}) => {
 
     return (
