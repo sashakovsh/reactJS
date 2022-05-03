@@ -2,19 +2,25 @@ import React, {useState, useRef, useEffect} from "react";
 import {Button, TextField, Grid} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "../store/messages/actions";
 
-const ControlPanel = ({addMessage, chats}) => {
+const ControlPanel = () => {
   let {chatId} = useParams();
-  const [messageList, setMessageList] = useState([]);
   const [value, setValue] = useState(''); 
   const inputRef = useRef();
+  const dispatch = useDispatch();
+  const author = useSelector(state => state.profile.name);
+  const isChatsExist = useSelector(state => state.chats.chatList.length); 
+  const messages = useSelector(state => state.messages.messageList);
+  
   const handleInput = (event) => {
     setValue(event.target.value);
   };
   const handleSend = () => {
     if (value !== '') {
-      const newMessage = {text: value, author: 'Alex'};
-      addMessage(chatId, newMessage);
+      const newMessage = {text: value, author};
+      dispatch(addMessage(chatId, newMessage));
       setValue('');
       inputRef.current?.focus();
     }
@@ -28,21 +34,23 @@ const ControlPanel = ({addMessage, chats}) => {
   useEffect( () => {
     inputRef.current?.focus();
   }, []);
+
   useEffect( () => {
     let timer;
-    if(messageList.length > 0 
-      && messageList[messageList.length - 1].author !== 'bot') {
-        timer = setInterval( () => {
-          setMessageList([...messageList, newMessage])}, 1000);
+    if(messages?.length > 0 
+      && messages[messages.length - 1].author !== 'bot') {
         const newMessage = {text: 'Я робот', author: 'bot'};
+        timer = setInterval( () => {
+          dispatch(addMessage(chatId, newMessage))}, 1000);
       }
     return () => {
       if (timer) {
         clearInterval(timer);
       }
-    }
+    } 
   });
-    if(chats[chatId]) {
+
+    if(isChatsExist ? chatId : false) {
         return (
             <div>
                 <Grid className="chat-input">

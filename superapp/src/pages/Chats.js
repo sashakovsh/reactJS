@@ -4,14 +4,14 @@ import ControlPanel from "../components/ControlPanel";
 import ChatsList from "../components/ChatsList";
 import MessageList from "../components/MessageList";
 
-const Chats = ({chats, addMessage}) => {
+const Chats = () => {
 
     return (
       <Container maxWidth="md" sx={{display: "flex", gap: 10, marginTop: 10}}>
-        <ChatsList chats={chats} />    
+        <ChatsList />    
         <div className="chats-body">
-          <MessageList chats={chats} />    
-          <ControlPanel addMessage={addMessage} chats={chats} />
+          <MessageList />    
+          <ControlPanel />
         </div>
       </Container>
     )

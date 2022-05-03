@@ -5,36 +5,12 @@ import Profile from './Profile';
 import { Box, Tab, Tabs } from '@mui/material';
 import Home from './Home';
 
-const initialChats = {
-    id1: {
-      name: 'Первый',
-      message: [
-        {text: 'some text', author: 'bot'},
-        {text: 'hello', author: 'Alex'}
-    ]
-    },
-    id2: {
-      name: 'Второй',
-      message: [{text: 'some text 2', author: 'Alex'}]
-    }
-  }
-
 export default function Router() {
-    const [chats, setChats] = useState(initialChats);
     const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const addMessage = (chatId, message) => {
-        setChats( {
-            ...chats,   
-            [chatId]: {
-                name: chats[chatId].name,
-                message: [...chats[chatId].message, message]
-            }
-        })
-    }
     return (
     <div>
         <Box sx={{ width: '100%' }}>
@@ -55,11 +31,9 @@ export default function Router() {
             <Route path="/profile" element={<Profile />}></Route>
             <Route
                 path="/chats/:chatId" 
-                element={<Chats chats={chats} 
-                addMessage={addMessage}
-                />}>
+                element={<Chats />}>
             </Route>
-            <Route path="/chats/*" element={<Chats chats={chats} />}></Route>
+            <Route path="/chats/*" element={<Chats />}></Route>
         </Routes>
     </div>   
     )
