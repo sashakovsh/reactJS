@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
-import './index.css';
-import App from './App';
+import { PersistGate } from 'redux-persist/integration/react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Provider } from 'react-redux';
-import store from './store/index';
+
+import './index.css';
+import App from './App';
+import store, {persistor} from './store/index';
+import { CircularProgress } from '@mui/material';
 
 const theme = createTheme({
   palette: {
@@ -26,11 +29,13 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
+      <PersistGate persistor={persistor} loading={<CircularProgress />}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
             <App />
-        </BrowserRouter>
-      </ThemeProvider>
+          </BrowserRouter>
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

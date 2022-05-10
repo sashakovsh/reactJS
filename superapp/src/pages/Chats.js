@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from '@mui/material';
 import ControlPanel from "../components/ControlPanel";
-import ChatsList from "../components/ChatsList";
+import ChatsList from "../components/ChatsListComponent";
 import MessageList from "../components/MessageList";
 
 const Chats = () => {
