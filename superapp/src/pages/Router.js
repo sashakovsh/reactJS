@@ -4,6 +4,7 @@ import Chats from './Chats';
 import Profile from './Profile';
 import { Box, Tab, Tabs } from '@mui/material';
 import Home from './Home';
+import CatsFacts from './CatsFacts';
 
 export default function Router() {
     const [value, setValue] = useState(0);
@@ -23,6 +24,7 @@ export default function Router() {
                     <Tab label="Главная" component={RouterLink} to='/'/>
                     <Tab label="Список чатов" component={RouterLink} to='/chats'/>
                     <Tab label="Профиль" component={RouterLink} to='/profile'/>
+                    <Tab label="API" component={RouterLink} to='/apipage'/>
                 </Tabs>
             </Box>
         </Box>
@@ -34,6 +36,7 @@ export default function Router() {
                 element={<Chats />}>
             </Route>
             <Route path="/chats/*" element={<Chats />}></Route>
+            <Route path="/apipage" element={<CatsFacts />}></Route>
         </Routes>
     </div>   
     )
