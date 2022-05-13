@@ -3,9 +3,7 @@ import {Button, TextField, Grid} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addMessageWithSaga, 
-  // addMessageWithThunk 
-} from "../store/messages/actions";
+import { addMessageWithFB, getMessagesByChatIdWithFB } from "../middlewares/middleware";
 
 const ControlPanel = () => {
   let {chatId} = useParams();
@@ -21,7 +19,7 @@ const ControlPanel = () => {
   const handleSend = () => {
     if (value !== '') {
       const newMessage = {text: value, author};
-      dispatch(addMessageWithSaga(chatId, newMessage));
+      dispatch(addMessageWithFB(chatId, newMessage));
       setValue('');
       inputRef.current?.focus();
     }
@@ -35,6 +33,9 @@ const ControlPanel = () => {
   useEffect( () => {
     inputRef.current?.focus();
   }, []);
+  useEffect( () => {
+    dispatch(getMessagesByChatIdWithFB(chatId))
+  }, [chatId]);
 
   if(isChatsExist ? chatId : false) {
         return (

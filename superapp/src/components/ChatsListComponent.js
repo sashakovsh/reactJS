@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addChat, deleteChat } from "../store/chats/actions";
+import { useParams } from "react-router-dom";
+import { addChatWithFB, deleteChatWithFB, initTrackerWithFB } from "../middlewares/middleware";
 import { chatList } from "../store/chats/selectors";
 import ChatsList from "./ChatsList";
 
@@ -9,6 +10,7 @@ const ChatsListComponent = () => {
     const [visible, setVisible] = useState(false);
     const [chatName, setChatName] = useState('');
     const dispatch = useDispatch();
+    const { chatId } = useParams();
 
     const handleChatName = (e) => {
         setChatName(e.target.value)
@@ -21,13 +23,14 @@ const ChatsListComponent = () => {
     const handleOpen = () => {
         setVisible(true)
     }
-    const handleDelete = (e) => {
-        dispatch(deleteChat( e.target.closest('button').id ))
+    const handleDelete = () => {
+        dispatch(deleteChatWithFB( chatId ))
+        console.log(chatId);
     }
 
     const handleSave = () => {
         if(chatName && chatName !== ' ') {
-            dispatch(addChat(chatName));
+            dispatch(addChatWithFB(chatName));
             setChatName('');
             handleClose()
         }
@@ -40,9 +43,13 @@ const ChatsListComponent = () => {
         }
     }
 
+    useEffect( () => {
+        dispatch(initTrackerWithFB())
+    }, [chatId]);
+
     return (<ChatsList 
                 chats={chats} 
-                handleDelete={handleDelete} 
+                handleDelete={() => handleDelete}
                 handleOpen={handleOpen} 
                 handleClose={handleClose} 
                 handleChatName={handleChatName} 
