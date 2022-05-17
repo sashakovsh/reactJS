@@ -18,7 +18,7 @@ const ChatsList = (
                         >
                         <ListItemButton> 
                             <ListItemText primary={chat.name} />
-                            <IconButton id={chat.id} onClick={handleDelete} edge="end" aria-label="delete">
+                            <IconButton onClick={handleDelete(chat.id)} edge="end" aria-label="delete">
                                 <DeleteIcon />
                             </IconButton>
                         </ListItemButton> 
