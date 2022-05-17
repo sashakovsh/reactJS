@@ -6,7 +6,7 @@ import { chatList } from "../store/chats/selectors";
 import ChatsList from "./ChatsList";
 
 const ChatsListComponent = () => {
-    const chats = useSelector(chatList)
+    const chats = useSelector(chatList);
     const [visible, setVisible] = useState(false);
     const [chatName, setChatName] = useState('');
     const dispatch = useDispatch();
@@ -15,19 +15,15 @@ const ChatsListComponent = () => {
     const handleChatName = (e) => {
         setChatName(e.target.value)
     }
-
     const handleClose = () => {
         setVisible(false)
     }
-
     const handleOpen = () => {
         setVisible(true)
     }
-    const handleDelete = () => {
-        dispatch(deleteChatWithFB( chatId ))
-        console.log(chatId);
+    const handleDelete = (e) => {
+        dispatch(deleteChatWithFB(e.target.closest('a').id))
     }
-
     const handleSave = () => {
         if(chatName && chatName !== ' ') {
             dispatch(addChatWithFB(chatName));
@@ -42,11 +38,10 @@ const ChatsListComponent = () => {
             setVisible(false)
         }
     }
-
     useEffect( () => {
         dispatch(initTrackerWithFB())
     }, [chatId]);
-
+  
     return (<ChatsList 
                 chats={chats} 
                 handleDelete={() => handleDelete}

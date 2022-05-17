@@ -1,9 +1,11 @@
 import { ADD_CHAT, CHATS_UPDATE, DEL_CHAT } from "./actions";
 
 const initialState = {
-    chatList: []
+    chatList: [
+        {id:1, name: 'test'} // для теста экшена удаления
+    ]
 };
-
+            
 const chatsReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_CHAT:
@@ -12,7 +14,7 @@ const chatsReducer = (state = initialState, action) => {
                 chatList: [
                     ...state.chatList,
                     {
-                        id: `id${state.chatList.length + 1}`,
+                        id: action.payload,
                         name: action.payload
                     }
                 ]

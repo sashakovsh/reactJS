@@ -35,10 +35,14 @@ const Login = () => {
         }
     }
 
+    if(auth.user) {
+        return <Alert style={{justifyContent: 'center'}} severity="success">Вы уже вошли, в общем-то</Alert>
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <Typography paddingTop='20px'>Войти</Typography>
+                <Typography paddingTop='20px'>Для доступа к функциям необхдимо войти в систему</Typography>
                 <Box 
                     display="flex" 
                     flexDirection="column"

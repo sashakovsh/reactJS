@@ -5,8 +5,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const ChatsList = (
     {chats, handleDelete, handleOpen, handleClose, handleChatName, handleEnterPressed, chatName, visible, handleSave}
-    ) => 
-    (<Grid sx={{width: 300}}>
+    ) => {
+
+    return (<Grid sx={{width: 300}}>
             <Typography variant="h6" textAlign="left">Список чатов</Typography>
             <List>
                 {chats?.length > 0 ? chats.map((chat, index) => (
@@ -15,6 +16,7 @@ const ChatsList = (
                         component={RouterLink} 
                         to={`/chats/${chat.id}`} 
                         key={index}
+                        id={chat.id}
                         >
                         <ListItemButton> 
                             <ListItemText primary={chat.name} />
@@ -26,8 +28,7 @@ const ChatsList = (
                 )) : <div>Создайте чат</div>}
             </List>
             <Button onClick={handleOpen} variant="contained">Добавить чат</Button>
-            <Dialog 
-                
+            <Dialog
                 open={visible} 
                 onClose={handleClose}  
                 PaperProps={{
@@ -59,6 +60,6 @@ const ChatsList = (
                     onClick={handleSave}>Добавить чат</Button>
             </Dialog>
         </Grid>
-);
+)};
 
 export default ChatsList;

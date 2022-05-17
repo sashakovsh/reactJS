@@ -47,7 +47,7 @@ export const deleteChatWithFB = (id) => async () => {
     const messagesRef = ref(db, `/messages/${id}`);
     remove(chatRef).then((res) => {
         console.log('Чат удален', res);
-    });
+    }).catch((e) => console.log(e));
     remove(messagesRef).then((res) => {
         console.log('Сообщение удалено', res);
     });
