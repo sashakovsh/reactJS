@@ -17,7 +17,8 @@ const Registration = () => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-
+        setEmail('');
+        setPassword('');
         try {
             const auth = getAuth(firebase);
             await createUserWithEmailAndPassword(auth, email, password);
